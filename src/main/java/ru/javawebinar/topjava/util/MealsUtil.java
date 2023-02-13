@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,14 @@ public class MealsUtil {
                 .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
+    }
+
+    public static String formatLocalDate(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    public static String formatLocalTime(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
